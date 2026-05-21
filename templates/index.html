@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App del Clima</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Barlow', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    color: white;
+  }
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 42px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .subtitulo {
+    color: #90caf9;
+    font-size: 14px;
+    margin-bottom: 36px;
+    letter-spacing: 1px;
+  }
+
+  form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 32px;
+  }
+
+  input {
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    outline: none;
+  }
+
+  input::placeholder { color: rgba(255,255,255,0.5); }
+  input:focus { background: rgba(255,255,255,0.25); }
+
+  button {
+    padding: 14px 24px;
+    border-radius: 8px;
+    border: none;
+    background: #1e88e5;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  button:hover { background: #1565c0; }
+
+  .error {
+    background: rgba(239,68,68,0.2);
+    border: 1px solid #ef4444;
+    color: #fca5a5;
+    padding: 14px 24px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 36px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+  }
+
+  .ciudad {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .pais {
+    color: #90caf9;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .icono {
+    width: 90px;
+    height: 90px;
+  }
+
+  .temperatura {
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1;
+    margin: 10px 0;
+  }
+
+  .descripcion {
+    color: #90caf9;
+    font-size: 18px;
+    margin-bottom: 28px;
+    text-transform: capitalize;
+  }
+
+  .detalles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 24px;
+  }
+
+  .detalle-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .detalle-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+
+  .detalle-valor {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .detalle-unidad {
+    font-size: 12px;
+    color: #90caf9;
+  }
+</style>
+</head>
+<body>
+
+<h1>🌤 CLIMA</h1>
+<p class="subtitulo">Consultá el tiempo en cualquier ciudad del mundo</p>
+
+<form method="POST">
+  <input type="text" name="ciudad" placeholder="Ingresá una ciudad..." required autofocus>
+  <button type="submit">Buscar</button>
+</form>
+
+{% if error %}
+<div class="error">{{ error }}</div>
+{% endif %}
+
+{% if clima %}
+<div class="card">
+  <div class="ciudad">{{ clima.ciudad }}</div>
+  <div class="pais">{{ clima.pais }}</div>
+  <img class="icono" src="https://openweathermap.org/img/wn/{{ clima.icono }}@2x.png" alt="{{ clima.descripcion }}">
+  <div class="temperatura">{{ clima.temperatura }}°</div>
+  <div class="descripcion">{{ clima.descripcion }}</div>
+  <div class="detalles">
+    <div class="detalle-item">
+      <span class="detalle-label">Sensación</span>
+      <span class="detalle-valor">{{ clima.sensacion }}°</span>
+      <span class="detalle-unidad">Celsius</span>
+    </div>
+    <div class="detalle-item">
+      <span class="detalle-label">Humedad</span>
+      <span class="detalle-valor">{{ clima.humedad }}%</span>
+      <span class="detalle-unidad">Relativa</span>
+    </div>
+    <div class="detalle-item">
+      <span class="detalle-label">Viento</span>
+      <span class="detalle-valor">{{ clima.viento }}</span>
+      <span class="detalle-unidad">km/h</span>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+</body>
+</html>
