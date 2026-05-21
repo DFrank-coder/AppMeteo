@@ -11,6 +11,9 @@
   body {
     min-height: 100vh;
     background: #0d0d0d;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(255, 210, 0, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(255, 180, 0, 0.03) 0%, transparent 50%);
     font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
@@ -23,12 +26,15 @@
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 6px;
-    color: #555;
+    color: #444;
     text-transform: uppercase;
     margin-bottom: 60px;
   }
 
-  .logo span { color: #f0f0f0; }
+  .logo span {
+    color: #FFD700;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+  }
 
   form {
     display: flex;
@@ -44,32 +50,41 @@
     border-radius: 6px;
     border: 1px solid #222;
     font-size: 15px;
-    background: #141414;
+    background: #111;
     color: #f0f0f0;
     outline: none;
     font-family: 'Inter', sans-serif;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
 
-  input::placeholder { color: #444; }
-  input:focus { border-color: #444; }
+  input::placeholder { color: #333; }
+
+  input:focus {
+    border-color: rgba(255, 215, 0, 0.4);
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.08);
+  }
 
   button {
     padding: 14px 20px;
     border-radius: 6px;
-    border: 1px solid #333;
-    background: #1a1a1a;
-    color: #f0f0f0;
-    font-size: 15px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    background: transparent;
+    color: #FFD700;
+    font-size: 16px;
     font-family: 'Inter', sans-serif;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
   }
 
-  button:hover { background: #222; }
+  button:hover {
+    background: rgba(255, 215, 0, 0.06);
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.1);
+  }
 
   .error {
-    color: #666;
+    color: #555;
     font-size: 14px;
     margin-bottom: 20px;
   }
@@ -78,15 +93,23 @@
     width: 100%;
     max-width: 420px;
     text-align: center;
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 40px 32px;
+    background: #0f0f0f;
+    box-shadow:
+      0 0 40px rgba(255, 215, 0, 0.04),
+      inset 0 1px 0 rgba(255, 215, 0, 0.05);
   }
 
   .ciudad {
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 4px;
-    color: #555;
+    color: #FFD700;
     text-transform: uppercase;
     margin-bottom: 4px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
   }
 
   .pais {
@@ -99,8 +122,9 @@
   .icono {
     width: 64px;
     height: 64px;
-    opacity: 0.8;
+    opacity: 0.9;
     margin-bottom: 8px;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.2));
   }
 
   .temperatura {
@@ -109,20 +133,20 @@
     line-height: 1;
     letter-spacing: -4px;
     margin-bottom: 12px;
+    color: #f0f0f0;
   }
 
   .descripcion {
-    font-size: 13px;
-    color: #555;
-    letter-spacing: 2px;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
 
   .detalles {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 0;
     border-top: 1px solid #1a1a1a;
     padding-top: 32px;
   }
@@ -147,20 +171,21 @@
   .detalle-valor {
     font-size: 28px;
     font-weight: 300;
-    color: #f0f0f0;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
   }
 
   .detalle-unidad {
     font-size: 10px;
-    color: #333;
+    color: #2a2a2a;
     letter-spacing: 1px;
   }
 
   .footer {
-    margin-top: 80px;
-    font-size: 11px;
-    color: #222;
-    letter-spacing: 2px;
+    margin-top: 48px;
+    font-size: 10px;
+    color: #1f1f1f;
+    letter-spacing: 3px;
   }
 </style>
 </head>
@@ -204,7 +229,7 @@
 </div>
 {% endif %}
 
-<div class="footer">METEOGALLE · {{ 2026 }}</div>
+<div class="footer">METEOGALLE · 2026</div>
 
 </body>
 </html>
