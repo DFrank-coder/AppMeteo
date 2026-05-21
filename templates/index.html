@@ -3,165 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>App del Clima</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<title>MeteoGalle</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    font-family: 'Barlow', sans-serif;
+    background: #0d0d0d;
+    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
-    color: white;
+    padding: 60px 20px;
+    color: #f0f0f0;
   }
 
-  h1 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 42px;
-    letter-spacing: 3px;
-    margin-bottom: 8px;
+  .logo {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 6px;
+    color: #555;
+    text-transform: uppercase;
+    margin-bottom: 60px;
   }
 
-  .subtitulo {
-    color: #90caf9;
-    font-size: 14px;
-    margin-bottom: 36px;
-    letter-spacing: 1px;
-  }
+  .logo span { color: #f0f0f0; }
 
   form {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
-    max-width: 480px;
-    margin-bottom: 32px;
+    max-width: 420px;
+    margin-bottom: 48px;
   }
 
   input {
     flex: 1;
     padding: 14px 18px;
-    border-radius: 8px;
-    border: none;
-    font-size: 16px;
-    background: rgba(255,255,255,0.15);
-    color: white;
+    border-radius: 6px;
+    border: 1px solid #222;
+    font-size: 15px;
+    background: #141414;
+    color: #f0f0f0;
     outline: none;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
   }
 
-  input::placeholder { color: rgba(255,255,255,0.5); }
-  input:focus { background: rgba(255,255,255,0.25); }
+  input::placeholder { color: #444; }
+  input:focus { border-color: #444; }
 
   button {
-    padding: 14px 24px;
-    border-radius: 8px;
-    border: none;
-    background: #1e88e5;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
+    padding: 14px 20px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #f0f0f0;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
     cursor: pointer;
     transition: background 0.2s;
   }
 
-  button:hover { background: #1565c0; }
+  button:hover { background: #222; }
 
   .error {
-    background: rgba(239,68,68,0.2);
-    border: 1px solid #ef4444;
-    color: #fca5a5;
-    padding: 14px 24px;
-    border-radius: 8px;
+    color: #666;
+    font-size: 14px;
     margin-bottom: 20px;
   }
 
   .card {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 16px;
-    padding: 36px;
     width: 100%;
-    max-width: 480px;
+    max-width: 420px;
     text-align: center;
   }
 
   .ciudad {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 36px;
-    letter-spacing: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: #555;
+    text-transform: uppercase;
     margin-bottom: 4px;
   }
 
   .pais {
-    color: #90caf9;
-    font-size: 14px;
+    font-size: 11px;
+    color: #333;
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
   }
 
   .icono {
-    width: 90px;
-    height: 90px;
+    width: 64px;
+    height: 64px;
+    opacity: 0.8;
+    margin-bottom: 8px;
   }
 
   .temperatura {
-    font-size: 72px;
-    font-weight: 600;
+    font-size: 96px;
+    font-weight: 300;
     line-height: 1;
-    margin: 10px 0;
+    letter-spacing: -4px;
+    margin-bottom: 12px;
   }
 
   .descripcion {
-    color: #90caf9;
-    font-size: 18px;
-    margin-bottom: 28px;
-    text-transform: capitalize;
+    font-size: 13px;
+    color: #555;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
   }
 
   .detalles {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    padding-top: 24px;
+    gap: 0;
+    border-top: 1px solid #1a1a1a;
+    padding-top: 32px;
   }
 
   .detalle-item {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
+    padding: 0 16px;
+    border-right: 1px solid #1a1a1a;
   }
 
+  .detalle-item:last-child { border-right: none; }
+
   .detalle-label {
-    font-size: 11px;
-    letter-spacing: 1px;
-    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #333;
     text-transform: uppercase;
   }
 
   .detalle-valor {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 300;
+    color: #f0f0f0;
   }
 
   .detalle-unidad {
-    font-size: 12px;
-    color: #90caf9;
+    font-size: 10px;
+    color: #333;
+    letter-spacing: 1px;
+  }
+
+  .footer {
+    margin-top: 80px;
+    font-size: 11px;
+    color: #222;
+    letter-spacing: 2px;
   }
 </style>
 </head>
 <body>
 
-<h1>🌤 CLIMA</h1>
-<p class="subtitulo">Consultá el tiempo en cualquier ciudad del mundo</p>
+<div class="logo">Meteo<span>Galle</span></div>
 
 <form method="POST">
-  <input type="text" name="ciudad" placeholder="Ingresá una ciudad..." required autofocus>
-  <button type="submit">Buscar</button>
+  <input type="text" name="ciudad" placeholder="Ciudad..." required autofocus>
+  <button type="submit">→</button>
 </form>
 
 {% if error %}
@@ -194,6 +203,8 @@
   </div>
 </div>
 {% endif %}
+
+<div class="footer">METEOGALLE · {{ 2026 }}</div>
 
 </body>
 </html>
